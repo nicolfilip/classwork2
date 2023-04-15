@@ -7,12 +7,12 @@ import static classWork2.Employee.employeesCounter;
 
 public class Ligat_HaAl {
 //    public static Employee[] employees = new Employee[100];
-
     public static List<Employee> employees = new ArrayList<>();
-    private static List<Team> teams  = new ArrayList<>();
+
+    private static List<Team> teams  = initializeTeams();
 
     private static List<Game> games = gameBoard();
-    ;
+
 
     private static List<Referee> referees = initializeReferees();
 
@@ -20,6 +20,17 @@ public class Ligat_HaAl {
 
     public Ligat_HaAl() {
         menu();
+    }
+
+    private static List<Team> initializeTeams() {
+        List<Team> teams = new ArrayList<>();
+        teams.add(createHBS());
+        teams.add(createHTA());
+        teams.add(createMH());
+        teams.add(createBj());
+
+        return teams;
+
     }
 
     //    private static Employee[] intializeEmployees(){
@@ -40,7 +51,7 @@ public class Ligat_HaAl {
         return referees;
     }
 
-    private static void createHBS() {
+    private static Team createHBS() {
         List<Player> hbsPlayers = new ArrayList<>();
         hbsPlayers.add(new Player("Omri", "Glayzer", 1, "Hapoel Beer-Sheva", 49, 30, "Goalkeeper"));
         hbsPlayers.add(new Player("Ariel", "Harush", 2, "Hapoel Beer-Sheva", 7, 3, "Goalkeeper"));
@@ -57,13 +68,13 @@ public class Ligat_HaAl {
 
         Coach hbsCoach = new Coach("Elyaniv", "Barda", 2, "Hapoel Beer Sheva", true, 1);
         Manager hbsManager = new Manager("Guy", "Primor", 1);
-        teams.add(new Team("Hapoel Beer Sheva", "Toto Turner", hbsPlayers, hbsCoach, hbsManager));
+        return new Team("Hapoel Beer Sheva", "Toto Turner", hbsPlayers, hbsCoach, hbsManager);
 
 
     }
 
 
-    private static void createHTA() {
+    private static Team createHTA() {
         List<Player> htaPlayers = new ArrayList<>();
         htaPlayers.add(new Player("Emilios", "Zubas", 2, "Hapoel Tel Aviv", 81, 62, "Goalkeeper"));
         htaPlayers.add(new Player("Stephen", "Marinovik", 3, "Hapoel Tel Aviv", 10, 6, "Goalkeeper"));
@@ -80,11 +91,11 @@ public class Ligat_HaAl {
 
         Coach htaCoach = new Coach("Haim", "Silbes", 5, "Hapoel Tel Aviv", false, 3);
         Manager htaManager = new Manager("Itzik", "Nisanov", 6);
-        teams.add (new Team("Hapoel Tel Aviv", "Bloomfield", htaPlayers, htaCoach, htaManager));
+        return new Team("Hapoel Tel Aviv", "Bloomfield", htaPlayers, htaCoach, htaManager);
 
     }
 
-    private static void createMH() {
+    private static Team createMH() {
         List<Player> mhPlayers = new ArrayList<>();
         mhPlayers.add(new Player("Josh", "Cohen", 2, "Maccabi Haifa", 90, 85, "Goalkeeper"));
         mhPlayers.add(new Player("Roey", "Mashpaty", 1, "Maccabi Haifa", 54, 49, "Goalkeeper"));
@@ -101,12 +112,12 @@ public class Ligat_HaAl {
 
         Coach mhCoach = new Coach("Barak", "Bachar", 5, "Maccabi Haifa", true, 4);
         Manager mhManager = new Manager("Yaakov", "Shachar", 10);
-        teams.add( new Team("Maccabi Haifa", "Sami Ofer", mhPlayers, mhCoach, mhManager));
+        return new Team("Maccabi Haifa", "Sami Ofer", mhPlayers, mhCoach, mhManager);
 
     }
 
 
-    private static void createBj() {
+    private static Team createBj() {
         List<Player> bjPlayers = new ArrayList<>();
         new Player("Miguel", "Silva", 2, "Beitar Jerusalem", 60, 57, "Goalkeeper");
         new Player("Netanel", "Daloya", 3, "Beitar Jerusalem", 36, 28, "Goalkeeper");
@@ -123,7 +134,7 @@ public class Ligat_HaAl {
 
         Coach bjCoach = new Coach("Yossi", "Abukasis", 6, "Beitar Jerusalem", false, 2);
         Manager bjManager = new Manager("Kfir", "Edri", 7);
-        teams.add( new Team("Beitar Jerusalem", "Teddi", bjPlayers, bjCoach, bjManager));
+        return new Team("Beitar Jerusalem", "Teddi", bjPlayers, bjCoach, bjManager);
 
     }
 
