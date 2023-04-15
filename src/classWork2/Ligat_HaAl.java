@@ -156,6 +156,7 @@ public class Ligat_HaAl {
                 }catch (Exception e){
                     System.out.println("Please choose a valid number in range 1-12");
                 }}while(choice == -1);
+            System.out.println("some change "); // todo delete
 
 
 
