@@ -11,7 +11,7 @@ public class Ligat_HaAl {
     public static List<Employee> employees = new ArrayList<>();
     private static Team[] teams = initializeTeams();
 
-    private static Game[] games = gameBoard();
+    private static List<Game> games = gameBoard();
     ;
 
     private static Referee[] referees = initializeReferees();
@@ -256,8 +256,8 @@ public class Ligat_HaAl {
         }
     }
 
-    private static Game[] gameBoard() {
-        Game[] games = new Game[12];
+    private static List<Game> gameBoard() {
+        List<Game> games = new ArrayList<>();
         Date date = new Date(2020 - 1900, 9 - 1, 22, 12, 30);
         Date date1 = new Date(2021 - 1900, 2 - 1, 27, 13, 30);
         Date date2 = new Date(2020 - 1900, 10 - 1, 4, 19, 0);
@@ -271,18 +271,18 @@ public class Ligat_HaAl {
         Date date10 = new Date(2023 - 1900, 4 - 1, 1, 21, 0);
         Date date11 = new Date(2024 - 1900, 2 - 1, 1, 22, 0);
 
-        games[0] = new Game(date, teams[0], teams[1], referees);
-        games[1] = new Game(date1, teams[1], teams[0], referees);
-        games[2] = new Game(date2, teams[0], teams[2], referees);
-        games[3] = new Game(date3, teams[2], teams[0], referees);
-        games[4] = new Game(date4, teams[2], teams[3], referees);
-        games[5] = new Game(date5, teams[3], teams[2], referees);
-        games[6] = new Game(date6, teams[0], teams[3], referees);
-        games[7] = new Game(date7, teams[3], teams[0], referees);
-        games[8] = new Game(date8, teams[1], teams[2], referees);
-        games[9] = new Game(date9, teams[2], teams[1], referees);
-        games[10] = new Game(date10, teams[1], teams[3], referees);
-        games[11] = new Game(date11, teams[3], teams[1], referees);
+        games.add(new Game(date, teams[0], teams[1], referees));
+        games.add(new Game(date1, teams[1], teams[0], referees));
+        games.add(new Game(date2, teams[0], teams[2], referees));
+        games.add(new Game(date3, teams[2], teams[0], referees));
+        games.add(new Game(date4, teams[2], teams[3], referees));
+        games.add(new Game(date5, teams[3], teams[2], referees));
+        games.add(new Game(date6, teams[0], teams[3], referees));
+        games.add(new Game(date7, teams[3], teams[0], referees));
+        games.add(new Game(date8, teams[1], teams[2], referees));
+        games.add(new Game(date9, teams[2], teams[1], referees));
+        games.add(new Game(date10, teams[1], teams[3], referees));
+        games.add(new Game(date11, teams[3], teams[1], referees));
         return games;
     }
 
@@ -344,19 +344,19 @@ public class Ligat_HaAl {
 
     private void add_goal() {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < games.length; i++) {
-            System.out.println("Game number " + (i + 1) + ": " + games[i]);
-            System.out.println(games[i].getDate());
+        for (int i = 0; i < games.size(); i++) {
+            System.out.println("Game number " + (i + 1) + ": " + games.get(i));
+            System.out.println(games.get(i).getDate());
         }
         System.out.println("Please select a game from the list by typing the desired game number: ");
         int choiceOfGame = scanner.nextInt();
         System.out.println("Please indicate the ID number of the player who scored a goal: ");
         String idNumberOfPlayer = scanner.next();
-        for (int i = 0; i < games.length; i++) {
+        for (int i = 0; i < games.size(); i++) {
             if (choiceOfGame == (i + 1)) {
-                if (games[i].getTeam1().checkIdNumber(idNumberOfPlayer) != null || games[i].getTeam2().checkIdNumber(idNumberOfPlayer) != null) {
-                    games[i].updateNumberOfGoals(idNumberOfPlayer);
-                    games[i].resultOfTheGame();
+                if (games.get(i).getTeam1().checkIdNumber(idNumberOfPlayer) != null || games.get(i).getTeam2().checkIdNumber(idNumberOfPlayer) != null) {
+                    games.get(i).updateNumberOfGoals(idNumberOfPlayer);
+                    games.get(i).resultOfTheGame();
                 }
 
             }
@@ -368,8 +368,8 @@ public class Ligat_HaAl {
     private void add_judgment_errors() {
         Scanner scanner1 = new Scanner(System.in);
         int counter = 0;
-        for (int i = 0; i < games.length; i++) {
-            System.out.println("Game number " + (i + 1) + ": " + games[i]);
+        for (int i = 0; i < games.size(); i++) {
+            System.out.println("Game number " + (i + 1) + ": " + games.get(i));
             System.out.println();
             for (int j = 0; j < referees.length; j++) {
                 System.out.println("Referees: " + referees[j].getFirstName() + " " + referees[j].getLastName());
@@ -382,11 +382,11 @@ public class Ligat_HaAl {
         String firstName = scanner1.next();
         System.out.println("Last name: ");
         String lastName = scanner1.next();
-        for (int i = 0; i < games.length; i++) {
+        for (int i = 0; i < games.size(); i++) {
             if (choiceOfGame == (i + 1)) {
                 for (int j = 0; j < referees.length; j++) {
                     if (referees[j].getFirstName().equals(firstName) && referees[j].getLastName().equals(lastName)) {
-                        games[i].updateJudgmentErrors(referees[j].getIdNumber());
+                        games.get(i).updateJudgmentErrors(referees[j].getIdNumber());
                         counter++;
                     }
                 }
@@ -431,18 +431,18 @@ public class Ligat_HaAl {
 
     private void print_table() {
         System.out.println("Score table: ");
-        for (int i = 0; i < games.length; i++) {
-            if (games[i].getNumberOfGoals_team1() != 0 || games[i].getGetNumberOfGoals_team2() != 0) {
-                if (games[i].getNumberOfGoals_team1() > games[i].getGetNumberOfGoals_team2()) {
-                    games[i].setNumberOfGoals_team1(3);
-                    System.out.println("The winner team is: " + games[i].getTeam1().getTeamName() + "\nScore: " + games[i].getNumberOfGoals_team1() + " - " + games[i].getGetNumberOfGoals_team2());
-                } else if (games[i].getNumberOfGoals_team1() < games[i].getGetNumberOfGoals_team2()) {
-                    games[i].setGetNumberOfGoals_team2(3);
-                    System.out.println("The winner team is: " + games[i].getTeam2().getTeamName() + "\nScore: " + games[i].getNumberOfGoals_team1() + " - " + games[i].getGetNumberOfGoals_team2());
+        for (int i = 0; i < games.size(); i++) {
+            if (games.get(i).getNumberOfGoals_team1() != 0 || games.get(i).getGetNumberOfGoals_team2() != 0) {
+                if (games.get(i).getNumberOfGoals_team1() > games.get(i).getGetNumberOfGoals_team2()) {
+                    games.get(i).setNumberOfGoals_team1(3);
+                    System.out.println("The winner team is: " + games.get(i).getTeam1().getTeamName() + "\nScore: " + games.get(i).getNumberOfGoals_team1() + " - " + games.get(i).getGetNumberOfGoals_team2());
+                } else if (games.get(i).getNumberOfGoals_team1() < games.get(i).getGetNumberOfGoals_team2()) {
+                    games.get(i).setGetNumberOfGoals_team2(3);
+                    System.out.println("The winner team is: " + games.get(i).getTeam2().getTeamName() + "\nScore: " + games.get(i).getNumberOfGoals_team1() + " - " + games.get(i).getGetNumberOfGoals_team2());
                 } else {
-                    games[i].setNumberOfGoals_team1(1);
-                    games[i].setGetNumberOfGoals_team2(1);
-                    System.out.println("Tie between the teams" + "\nScore: " + games[i].getNumberOfGoals_team1() + " - " + games[i].getGetNumberOfGoals_team2());
+                    games.get(i).setNumberOfGoals_team1(1);
+                    games.get(i).setGetNumberOfGoals_team2(1);
+                    System.out.println("Tie between the teams" + "\nScore: " + games.get(i).getNumberOfGoals_team1() + " - " + games.get(i).getGetNumberOfGoals_team2());
                 }
             } else {
                 System.out.println("The results of the game have not been typed yet" + "\nScore: " + "0-0");
