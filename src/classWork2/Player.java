@@ -15,6 +15,15 @@ public class Player extends Employee{
         setPlayer_position(player_position);
 
     }
+    public Player (String firstName, String lastName,String id, int seniority, String teamName, int attempts, int successful_attempts, String player_position){
+        super(firstName,lastName,id,seniority);
+        this.teamName= teamName;
+        this.attempts=attempts;
+
+        this.successful_attempts= successful_attempts;
+        setPlayer_position(player_position);
+
+    }
 
     @Override
     public void setFirstName(String firstName) {

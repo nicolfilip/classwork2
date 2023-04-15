@@ -12,6 +12,11 @@ public abstract class Person {
         this.lastName= lastName;
         this.idNumber= UUID.randomUUID().toString();
     }
+    public Person(String firstName, String lastName, String id){
+        this.firstName= firstName;
+        this.lastName= lastName;
+        this.idNumber= id;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

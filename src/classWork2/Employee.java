@@ -10,6 +10,11 @@ public abstract class Employee extends Person{
         this.seniority= seniority;
         Ligat_HaAl.employees.add(this);
     }
+    public Employee(String firstName, String lastName,String id, int seniority){
+        super(firstName, lastName,id);
+        this.seniority= seniority;
+        Ligat_HaAl.employees.add(this);
+    }
     public abstract double salaryOfEmployee();
 
     @Override

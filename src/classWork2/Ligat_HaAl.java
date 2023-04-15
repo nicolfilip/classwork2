@@ -1,12 +1,10 @@
 package classWork2;
 
-import java.time.*;
 import java.util.*;
 
 import static classWork2.Employee.employeesCounter;
 
 public class Ligat_HaAl {
-//    public static Employee[] employees = new Employee[100];
     public static List<Employee> employees = new ArrayList<>();
 
     private static List<Team> teams  = initializeTeams();
@@ -148,9 +146,17 @@ public class Ligat_HaAl {
         boolean close = false;
         while (!close) {
             Scanner scanner = new Scanner(System.in);
+            scanner.useDelimiter("\n");
             System.out.println("Please enter your choice: \n1.Add Player \n2.Add Referee \n3.Print Team Details \n4.Print referee details \n5.Print future games details ");
             System.out.println("6.Print employee salary \n7.Add Goal \n8.Add judgment errors \n9.Print outstanding people \n10.Print table \n11.Print player details with smallest salary  \n12. Exit");
-            int choice = scanner.nextInt();
+            int choice = -1;
+            do{
+                try{
+                    choice = scanner.nextInt();
+                }catch (Exception e){
+                    System.out.println("Please choose a valid number in range 1-12");
+                }}while(choice == -1);
+
 
 
             switch (choice) {
@@ -163,13 +169,20 @@ public class Ligat_HaAl {
                     System.out.println("Please indicate the last name of the player: ");
                     scanner.nextLine();
                     String lastNamePlayer = scanner.next();
+                    System.out.println("Please indicate the id of the player: ");
+                    scanner.nextLine();
+                    String id = scanner.next();
                     System.out.println("Please indicate the seniority of the player: ");
                     scanner.nextLine();
                     int seniorityPlayer = scanner.nextInt();
                     System.out.println("Please indicate the type of the player (Goalkeeper, Defender, Midfielder, Forward): ");
                     scanner.nextLine();
                     String typePlayer = scanner.next();
-                    Player player = new Player(firstNamePlayer, lastNamePlayer, seniorityPlayer, teamNamePlayer, 0, 0, typePlayer);
+                    if(employees.stream().anyMatch(it ->it.getIdNumber().equals(id))){
+                        System.out.println("Cant");
+                        break;
+                    }
+                    Player player = new Player(firstNamePlayer, lastNamePlayer, id, seniorityPlayer, teamNamePlayer, 0, 0, typePlayer);
                     addPlayerToTheGame(player);
                     break;
                 case 2:
@@ -287,23 +300,21 @@ public class Ligat_HaAl {
     }
 
     private void addPlayerToTheGame(Player player) {
-
-        if(employees.stream().anyMatch(it ->it.getIdNumber().equals(player.getIdNumber()))){
-            System.out.println("Cant");
-        }
-
-
         if (player.getTeamName().equals(teams.get(0).getTeamName())) {
             teams.get(0).addPlayer(player);
+            System.out.println("The player added successfully");
         } else if (player.getTeamName().equals(teams.get(1).getTeamName())) {
             teams.get(1).addPlayer(player);
+            System.out.println("The player added successfully");
         } else if (player.getTeamName().equals(teams.get(2).getTeamName())) {
             teams.get(2).addPlayer(player);
-        } else {
+            System.out.println("The player added successfully");
+        } else if(player.getTeamName().equals(teams.get(3).getTeamName())) {
             teams.get(3).addPlayer(player);
-        }
-
         System.out.println("The player added successfully");
+        }else{
+            System.out.println("Team not recognized. Player was not added.");
+        }
     }
 
     private void addReferee(Referee referee) {
