@@ -2,6 +2,7 @@ package classWork2;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Game {
     private Date date ;
@@ -12,7 +13,7 @@ public class Game {
     private int getNumberOfGoals_team2;
     private Referee [] referees;
 
-    public Game(Date date, Team team1,Team team2, Referee[] referees)  {
+    public Game(Date date, Team team1,Team team2, List<Referee> referees)  {
         SimpleDateFormat simpleDateFormat= new SimpleDateFormat("dd/MM/yyyy");
         simpleDateFormat.setLenient(false);
 
@@ -36,17 +37,17 @@ public class Game {
         }
     }
     public void updateNumberOfGoals(String idNumber){
-        for (int i=0; i< team1.getPlayers().length; i++){
-            if (idNumber.equals(team1.getPlayers()[i].getIdNumber())){
-                team1.getPlayers()[i].addAttempts(1);
-                team1.getPlayers()[i].addSuccessfulAttempts(1);
+        for (int i=0; i< team1.getPlayers().size(); i++){
+            if (idNumber.equals(team1.getPlayers().get(i).getIdNumber())){
+                team1.getPlayers().get(i).addAttempts(1);
+                team1.getPlayers().get(i).addSuccessfulAttempts(1);
                 setNumberOfGoals_team1(1);
             }
         }
-        for (int i=0; i< team2.getPlayers().length; i++){
-            if (idNumber.equals(team1.getPlayers()[i].getIdNumber())){
-                team2.getPlayers()[i].addAttempts(1);
-                team2.getPlayers()[i].addSuccessfulAttempts(1);
+        for (int i=0; i< team2.getPlayers().size(); i++){
+            if (idNumber.equals(team1.getPlayers().get(i).getIdNumber())){
+                team2.getPlayers().get(i).addAttempts(1);
+                team2.getPlayers().get(i).addSuccessfulAttempts(1);
                 setGetNumberOfGoals_team2(1);
             }
         }

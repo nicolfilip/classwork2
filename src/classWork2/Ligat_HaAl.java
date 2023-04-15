@@ -14,7 +14,7 @@ public class Ligat_HaAl {
     private static List<Game> games = gameBoard();
     ;
 
-    private static Referee[] referees = initializeReferees();
+    private static List<Referee> referees = initializeReferees();
 
 
 
@@ -31,15 +31,12 @@ public class Ligat_HaAl {
 //
 
 //    }
-    private static Referee[] initializeReferees() {
-        Referee[] referees = new Referee[4];
-        referees[0] = new Referee("Ami", "Sultan", 5, 5, 10, 8);
-        referees[1] = new Referee("Nicolay", "Tras", 10, 20, 60, 19);
-        referees[2] = new Referee("Yuli", "Cohen", 2, 11, 15, 5);
-        referees[3] = new Referee("Topaz", "Levi", 12, 25, 62, 30);
-
-
-
+    private static List<Referee> initializeReferees() {
+        List<Referee> referees = new ArrayList<>();
+        referees.add(new Referee("Ami", "Sultan", 5, 5, 10, 8));
+        referees.add(new Referee("Nicolay", "Tras", 10, 20, 60, 19));
+        referees.add(new Referee("Yuli", "Cohen", 2, 11, 15, 5));
+        referees.add(new Referee("Topaz", "Levi", 12, 25, 62, 30));
         return referees;
     }
 
@@ -190,7 +187,7 @@ public class Ligat_HaAl {
                     }
                     System.out.println("Please select a football team by its name: ");
                     String teamChoose = scanner.next();
-                    if (teamChoose.equals(teams[0].getTeamName()) || teamChoose.equals(teams[1].getTeamName()) || teamChoose.equals(teams[2].getTeamName()) || teamChoose.equals(teams[3].getTeamName())) {
+                    if (teamChoose.equals(teams.get(0).getTeamName()) || teamChoose.equals(teams.get(1).getTeamName()) || teamChoose.equals(teams.get(2).getTeamName()) || teamChoose.equals(teams.get(3).getTeamName())) {
                         print_team_details(teamChoose);
                     } else {
                         System.out.println("The name of the team isn't correct");
@@ -260,18 +257,18 @@ public class Ligat_HaAl {
         Date date10 = new Date(2023 - 1900, 4 - 1, 1, 21, 0);
         Date date11 = new Date(2024 - 1900, 2 - 1, 1, 22, 0);
 
-        games.add(new Game(date, teams[0], teams[1], referees));
-        games.add(new Game(date1, teams[1], teams[0], referees));
-        games.add(new Game(date2, teams[0], teams[2], referees));
-        games.add(new Game(date3, teams[2], teams[0], referees));
-        games.add(new Game(date4, teams[2], teams[3], referees));
-        games.add(new Game(date5, teams[3], teams[2], referees));
-        games.add(new Game(date6, teams[0], teams[3], referees));
-        games.add(new Game(date7, teams[3], teams[0], referees));
-        games.add(new Game(date8, teams[1], teams[2], referees));
-        games.add(new Game(date9, teams[2], teams[1], referees));
-        games.add(new Game(date10, teams[1], teams[3], referees));
-        games.add(new Game(date11, teams[3], teams[1], referees));
+        games.add(new Game(date, teams.get(0), teams.get(1), referees));
+        games.add(new Game(date1, teams.get(1), teams.get(0), referees));
+        games.add(new Game(date2, teams.get(0), teams.get(2), referees));
+        games.add(new Game(date3, teams.get(2), teams.get(0), referees));
+        games.add(new Game(date4, teams.get(2), teams.get(3), referees));
+        games.add(new Game(date5, teams.get(3), teams.get(2), referees));
+        games.add(new Game(date6, teams.get(0), teams.get(3), referees));
+        games.add(new Game(date7, teams.get(3), teams.get(0), referees));
+        games.add(new Game(date8, teams.get(1), teams.get(2), referees));
+        games.add(new Game(date9, teams.get(2), teams.get(1), referees));
+        games.add(new Game(date10, teams.get(1), teams.get(3), referees));
+        games.add(new Game(date11, teams.get(3), teams.get(1), referees));
         return games;
     }
 
@@ -282,14 +279,14 @@ public class Ligat_HaAl {
         }
 
 
-        if (player.getTeamName().equals(teams[0].getTeamName())) {
-            teams[0].addPlayer(player);
-        } else if (player.getTeamName().equals(teams[1].getTeamName())) {
-            teams[1].addPlayer(player);
-        } else if (player.getTeamName().equals(teams[2].getTeamName())) {
-            teams[2].addPlayer(player);
+        if (player.getTeamName().equals(teams.get(0).getTeamName())) {
+            teams.get(0).addPlayer(player);
+        } else if (player.getTeamName().equals(teams.get(1).getTeamName())) {
+            teams.get(1).addPlayer(player);
+        } else if (player.getTeamName().equals(teams.get(2).getTeamName())) {
+            teams.get(2).addPlayer(player);
         } else {
-            teams[3].addPlayer(player);
+            teams.get(3).addPlayer(player);
         }
 
         System.out.println("The player added successfully");
@@ -299,20 +296,15 @@ public class Ligat_HaAl {
         if(employees.stream().anyMatch(it ->it.getIdNumber().equals(referee.getIdNumber()))){
             System.out.println("Cant");
         }
-        Referee[] temp1 = new Referee[referees.length + 1];
-        for (int i = 0; i < referees.length; i++) {
-            temp1[i] = referees[i];
-            temp1[referees.length] = referee;
-            referees = temp1;
-        }
+        referees.add(referee);
         System.out.println("The referee added successfully");
     }
 
 
     private void print_team_details(String team) {
-        for (int i = 0; i < teams.length; i++) {
-            if (team.equals(teams[i].getTeamName())) {
-                System.out.println(teams[i]);
+        for (int i = 0; i < teams.size(); i++) {
+            if (team.equals(teams.get(i).getTeamName())) {
+                System.out.println(teams.get(i));
             }
         }
     }
@@ -360,8 +352,8 @@ public class Ligat_HaAl {
         for (int i = 0; i < games.size(); i++) {
             System.out.println("Game number " + (i + 1) + ": " + games.get(i));
             System.out.println();
-            for (int j = 0; j < referees.length; j++) {
-                System.out.println("Referees: " + referees[j].getFirstName() + " " + referees[j].getLastName());
+            for (int j = 0; j < referees.size(); j++) {
+                System.out.println("Referees: " + referees.get(j).getFirstName() + " " + referees.get(j).getLastName());
             }
         }
         System.out.println("Please select a game from the list by typing the desired game number: ");
@@ -373,9 +365,9 @@ public class Ligat_HaAl {
         String lastName = scanner1.next();
         for (int i = 0; i < games.size(); i++) {
             if (choiceOfGame == (i + 1)) {
-                for (int j = 0; j < referees.length; j++) {
-                    if (referees[j].getFirstName().equals(firstName) && referees[j].getLastName().equals(lastName)) {
-                        games.get(i).updateJudgmentErrors(referees[j].getIdNumber());
+                for (int j = 0; j < referees.size(); j++) {
+                    if ( referees.get(j).getFirstName().equals(firstName) && referees.get(j).getLastName().equals(lastName)) {
+                        games.get(i).updateJudgmentErrors( referees.get(j).getIdNumber());
                         counter++;
                     }
                 }
@@ -390,29 +382,29 @@ public class Ligat_HaAl {
     }
 
     private void print_outstanding_people() {
-        for (int i = 0; i < teams.length; i++) {
+        for (int i = 0; i < teams.size(); i++) {
             System.out.println("Outstanding players/coaches/managers in team " + (i + 1) + ": ");
-            for (int j = 0; j < teams[i].getPlayers().size(); j++) {
-                if (teams[i].getPlayers().get(j).outstanding()) {
-                    System.out.println("Information about the player: " + teams[i].getPlayers().get(j) + "\nSuccess rate: " + teams[i].getPlayers().get(j).success_rate());
+            for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
+                if (teams.get(i).getPlayers().get(j).outstanding()) {
+                    System.out.println("Information about the player: " + teams.get(i).getPlayers().get(j) + "\nSuccess rate: " + teams.get(i).getPlayers().get(j).success_rate());
                 }
             }
-            if (teams[i].getManager().outstanding()) {
-                System.out.println("Information about the manager: " + teams[i].getManager());
+            if (teams.get(i).getManager().outstanding()) {
+                System.out.println("Information about the manager: " + teams.get(i).getManager());
             }
-            if (teams[i].getCoach().outstanding()) {
-                System.out.println("Information about the coach: " + teams[i].getCoach() + "\nIs the coach a former player? " + teams[i].getCoach().isPastPlayer() + "\nNumber of championships: " + teams[i].getCoach().getNumberOfChampionships());
+            if (teams.get(i).getCoach().outstanding()) {
+                System.out.println("Information about the coach: " + teams.get(i).getCoach() + "\nIs the coach a former player? " + teams.get(i).getCoach().isPastPlayer() + "\nNumber of championships: " + teams.get(i).getCoach().getNumberOfChampionships());
             }
         }
 
         System.out.println("Outstanding referees: ");
-        for (int i = 0; i < referees.length; i++) {
-            if (referees[i].outstanding()) {
+        for (int i = 0; i < referees.size(); i++) {
+            if ( referees.get(i).outstanding()) {
                 boolean flag = false;
-                if (referees[i].getJudgmentErrors() == referees[i].getMaximumJudgmentErrors()) {
+                if ( referees.get(i).getJudgmentErrors() ==  referees.get(i).getMaximumJudgmentErrors()) {
                     flag = true;
                 }
-                System.out.println("Information about the referee: " + referees[i] + "\nNumber of judgment errors: " + referees[i].getJudgmentErrors() + "\nIs the number of judgment errors of this judge maximal?" + flag);
+                System.out.println("Information about the referee: " +  referees.get(i) + "\nNumber of judgment errors: " +  referees.get(i).getJudgmentErrors() + "\nIs the number of judgment errors of this judge maximal?" + flag);
             }
         }
     }
@@ -442,12 +434,12 @@ public class Ligat_HaAl {
     }
 
     private void print_player_details_with_smallest_salary() {
-//        for (int i = 0; i < teams.length; i++) {
-//            Player player_with_smallest_salary = teams[i].getPlayers();
-//            for (int j = 1; j < teams[i].getPlayers().size(); j++) {
+//        for (int i = 0; i < teams.size(); i++) {
+//            Player player_with_smallest_salary = teams.get(i).getPlayers();
+//            for (int j = 1; j < teams.get(i).getPlayers().size(); j++) {
 //                System.out.println("The players with the smallest salary in team " + (i + 1) + ": ");
-//                if (player_with_smallest_salary.salaryOfEmployee() > teams[i].getPlayers()[j].salaryOfEmployee()) {
-//                    player_with_smallest_salary = teams[i].getPlayers()[j];
+//                if (player_with_smallest_salary.salaryOfEmployee() > teams.get(i).getPlayers()[j].salaryOfEmployee()) {
+//                    player_with_smallest_salary = teams.get(i).getPlayers()[j];
 //                }
 //            }
 //            System.out.println(player_with_smallest_salary);
