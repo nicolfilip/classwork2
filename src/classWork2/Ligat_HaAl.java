@@ -15,6 +15,7 @@ public class Ligat_HaAl {
 
 
     private static List<Referee> referees = initializeReferees();
+    private static Integer maximumJudgmentErrors = 0;
 
 
 
@@ -48,6 +49,10 @@ public class Ligat_HaAl {
         referees.add(new Referee("Nicolay", "Tras", 10, 20, 60, 19));
         referees.add(new Referee("Yuli", "Cohen", 2, 11, 15, 5));
         referees.add(new Referee("Topaz", "Levi", 12, 25, 62, 30));
+        maximumJudgmentErrors = referees.stream()
+                .mapToInt(Referee::getJudgmentErrors)
+                .max()
+                .orElse(0);
         return referees;
     }
 
@@ -185,10 +190,8 @@ public class Ligat_HaAl {
                     System.out.println("Please indicate the number of games he refereed: ");
                     scanner.nextLine();
                     int numberOfGamesReferee = scanner.nextInt();
-                    int maximumJudgmentErrors = 0;
-                    for (Referee value : referees) {
-                        maximumJudgmentErrors = Math.max(judgmentErrors, value.getMaximumJudgmentErrors());
-                    }
+                    if(judgmentErrors > maximumJudgmentErrors)
+                        maximumJudgmentErrors = judgmentErrors;
                     Referee referee = new Referee(firstNameReferee, lastNameReferee, seniorityReferee, judgmentErrors, numberOfGamesReferee, maximumJudgmentErrors);
                     addReferee(referee);
                     break;
