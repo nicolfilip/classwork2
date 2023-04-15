@@ -8,8 +8,7 @@ public abstract class Employee extends Person{
     public Employee(String firstName, String lastName, int seniority){
         super(firstName, lastName);
         this.seniority= seniority;
-        Ligat_HaAl.employees[employeesCounter] = this;
-        employeesCounter++;
+        Ligat_HaAl.employees.add(this);
     }
     public abstract double salaryOfEmployee();
 

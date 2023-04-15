@@ -6,7 +6,9 @@ import java.util.*;
 import static classWork2.Employee.employeesCounter;
 
 public class Ligat_HaAl {
-    public static Employee[] employees = new Employee[100];
+//    public static Employee[] employees = new Employee[100];
+
+    public static List<Employee> employees = new ArrayList<>();
     private static Team[] teams = initializeTeams();
 
     private static Game[] games = gameBoard();
@@ -27,6 +29,16 @@ public class Ligat_HaAl {
 //        }
 //        return employees;
 //
+    private static Team[] initializeTeams() {
+        Team[] teams = new Team[4];
+        teams[0] = createHBS();
+        teams[1] = createHTA();
+        teams[2] = createMH();
+        teams[3] = createBj();
+
+        return teams;
+
+    }
 //    }
     private static Referee[] initializeReferees() {
         Referee[] referees = new Referee[4];
@@ -34,29 +46,26 @@ public class Ligat_HaAl {
         referees[1] = new Referee("Nicolay", "Tras", 10, 20, 60, 19);
         referees[2] = new Referee("Yuli", "Cohen", 2, 11, 15, 5);
         referees[3] = new Referee("Topaz", "Levi", 12, 25, 62, 30);
-        employees[0] = referees[0];
-        employees[1] = referees[1];
-        employees[2] = referees[2];
-        employees[3] = referees[3];
+
 
 
         return referees;
     }
 
     private static Team createHBS() {
-        Player[] hbsPlayers = new Player[12];
-        new Player("Omri", "Glayzer", 1, "Hapoel Beer-Sheva", 49, 30, "Goalkeeper");
-        new Player("Ariel", "Harush", 2, "Hapoel Beer-Sheva", 7, 3, "Goalkeeper");
-        new Player("Miguel", "Vitor", 6, "Hapoel Beer-Sheva", 75, 68, "Defender");
-        new Player("Eyad", "Abu Abid", 1, "Hapoel Beer-Sheva", 60, 40, "Defender");
-        new Player("Helder", "Lopes", 1, "Hapoel Beer Sheva", 56, 45, "Defender");
-        new Player("Ramsey", "Safury", 3, "Hapoel Beer Sheva", 17, 12, "Midfielder");
-        new Player("Dor", "Micha", 1, "Hapoel Beer Sheva", 26, 21, "Midfielder");
-        new Player("Shai", "Elias", 1, "Hapoel Beer Sheva", 9, 5, "Midfielder");
-        new Player("Roi", "Gordana", 4, "Hapoel Beer Sheva", 14, 9, "Midfielder");
-        new Player("Tomer", "Hemed", 1, "Hapoel Beer Sheva", 13, 9, "Forward");
-        new Player("Rotem", "Hatuel", 2, "Hapoel Beer Sheva", 22, 16, "Forward");
-        new Player("Itay", "Shechter", 1, "Hapoel Beer Sheva", 5, 2, "Forward");
+        List<Player> hbsPlayers = new ArrayList<>();
+        hbsPlayers.add(new Player("Omri", "Glayzer", 1, "Hapoel Beer-Sheva", 49, 30, "Goalkeeper"));
+        hbsPlayers.add(new Player("Ariel", "Harush", 2, "Hapoel Beer-Sheva", 7, 3, "Goalkeeper"));
+        hbsPlayers.add(new Player("Miguel", "Vitor", 6, "Hapoel Beer-Sheva", 75, 68, "Defender"));
+        hbsPlayers.add(new Player("Eyad", "Abu Abid", 1, "Hapoel Beer-Sheva", 60, 40, "Defender"));
+        hbsPlayers.add(new Player("Helder", "Lopes", 1, "Hapoel Beer Sheva", 56, 45, "Defender"));
+        hbsPlayers.add(new Player("Ramsey", "Safury", 3, "Hapoel Beer Sheva", 17, 12, "Midfielder"));
+        hbsPlayers.add(new Player("Dor", "Micha", 1, "Hapoel Beer Sheva", 26, 21, "Midfielder"));
+        hbsPlayers.add(new Player("Shai", "Elias", 1, "Hapoel Beer Sheva", 9, 5, "Midfielder"));
+        hbsPlayers.add(new Player("Roi", "Gordana", 4, "Hapoel Beer Sheva", 14, 9, "Midfielder"));
+        hbsPlayers.add(new Player("Tomer", "Hemed", 1, "Hapoel Beer Sheva", 13, 9, "Forward"));
+        hbsPlayers.add(new Player("Rotem", "Hatuel", 2, "Hapoel Beer Sheva", 22, 16, "Forward"));
+        hbsPlayers.add(new Player("Itay", "Shechter", 1, "Hapoel Beer Sheva", 5, 2, "Forward"));
 
         Coach hbsCoach = new Coach("Elyaniv", "Barda", 2, "Hapoel Beer Sheva", true, 1);
         Manager hbsManager = new Manager("Guy", "Primor", 1);
@@ -67,7 +76,7 @@ public class Ligat_HaAl {
 
 
     private static Team createHTA() {
-        Player[] htaPlayers = new Player[12];
+        List<Player> htaPlayers = new ArrayList<>();
         new Player("Emilios", "Zubas", 2, "Hapoel Tel Aviv", 81, 62, "Goalkeeper");
         new Player("Stephen", "Marinovik", 3, "Hapoel Tel Aviv", 10, 6, "Goalkeeper");
         new Player("Edi", "Gutliv", 4, "Hapoel Tel Aviv", 25, 23, "Defender");
@@ -90,7 +99,7 @@ public class Ligat_HaAl {
     }
 
     private static Team createMH() {
-        Player[] mhPlayers = new Player[12];
+        List<Player> mhPlayers = new ArrayList<>();
         new Player("Josh", "Cohen", 2, "Maccabi Haifa", 90, 85, "Goalkeeper");
         new Player("Roey", "Mashpaty", 1, "Maccabi Haifa", 54, 49, "Goalkeeper");
         new Player("Abdulay", "Sak", 3, "Maccabi Haifa", 10, 7, "Defender");
@@ -110,19 +119,9 @@ public class Ligat_HaAl {
         return mh;
     }
 
-    private static Team[] initializeTeams() {
-        Team[] teams = new Team[4];
-        teams[0] = createHBS();
-        teams[1] = createHTA();
-        teams[2] = createMH();
-        teams[3] = createBj();
-
-        return teams;
-
-    }
 
     private static Team createBj() {
-        Player[] bjPlayers = new Player[12];
+        List<Player> bjPlayers = new ArrayList<>();
         new Player("Miguel", "Silva", 2, "Beitar Jerusalem", 60, 57, "Goalkeeper");
         new Player("Netanel", "Daloya", 3, "Beitar Jerusalem", 36, 28, "Goalkeeper");
         new Player("Sergey", "Borodin", 1, "Beitar Jerusalem", 11, 7, "Defender");
@@ -288,17 +287,12 @@ public class Ligat_HaAl {
     }
 
     private void addPlayerToTheGame(Player player) {
-        Employee[] temp = new Employee[employees.length + 1];
-        for (int i = 0; i < employeesCounter; i++) {
-            if (player.getIdNumber().equals(employees[i].getIdNumber())) {
-                System.out.println("There is already a player with this id number ");
-            } else {
-                temp[i] = employees[i];
-                temp[employees.length] = player;
-                employees = temp;
-            }
 
+        if(employees.stream().anyMatch(it ->it.getIdNumber().equals(player.getIdNumber()))){
+            System.out.println("Cant");
         }
+
+
         if (player.getTeamName().equals(teams[0].getTeamName())) {
             teams[0].addPlayer(player);
         } else if (player.getTeamName().equals(teams[1].getTeamName())) {
@@ -313,16 +307,8 @@ public class Ligat_HaAl {
     }
 
     private void addReferee(Referee referee) {
-        Employee[] temp = new Employee[employees.length + 1];
-        for (int i = 0; i < employeesCounter; i++) {
-            if (referee.getIdNumber().equals(employees[i].getIdNumber())) {
-                System.out.println("There is already a referee with this id number ");
-            } else {
-                temp[i] = employees[i];
-                temp[employees.length] = referee;
-                employees = temp;
-
-            }
+        if(employees.stream().anyMatch(it ->it.getIdNumber().equals(referee.getIdNumber()))){
+            System.out.println("Cant");
         }
         Referee[] temp1 = new Referee[referees.length + 1];
         for (int i = 0; i < referees.length; i++) {
@@ -345,8 +331,8 @@ public class Ligat_HaAl {
     private void print_employee_salary(String idNumber) {
         int c = 0;
         for (int i = 0; i < employeesCounter; i++) {
-            if (employees[i].getIdNumber().equals(idNumber)) {
-                System.out.println(employees[i].salaryOfEmployee());
+            if (employees.get(i).getIdNumber().equals(idNumber)) {
+                System.out.println(employees.get(i).salaryOfEmployee());
                 c++;
             }
         }
@@ -417,9 +403,9 @@ public class Ligat_HaAl {
     private void print_outstanding_people() {
         for (int i = 0; i < teams.length; i++) {
             System.out.println("Outstanding players/coaches/managers in team " + (i + 1) + ": ");
-            for (int j = 0; j < teams[i].getPlayers().length; j++) {
-                if (teams[i].getPlayers()[j].outstanding()) {
-                    System.out.println("Information about the player: " + teams[i].getPlayers()[j] + "\nSuccess rate: " + teams[i].getPlayers()[j].success_rate());
+            for (int j = 0; j < teams[i].getPlayers().size(); j++) {
+                if (teams[i].getPlayers().get(j).outstanding()) {
+                    System.out.println("Information about the player: " + teams[i].getPlayers().get(j) + "\nSuccess rate: " + teams[i].getPlayers().get(j).success_rate());
                 }
             }
             if (teams[i].getManager().outstanding()) {
@@ -467,17 +453,17 @@ public class Ligat_HaAl {
     }
 
     private void print_player_details_with_smallest_salary() {
-        for (int i = 0; i < teams.length; i++) {
-            Player player_with_smallest_salary = teams[i].getPlayers()[0];
-            for (int j = 1; j < teams[i].getPlayers().length; j++) {
-                System.out.println("The players with the smallest salary in team " + (i + 1) + ": ");
-                if (player_with_smallest_salary.salaryOfEmployee() > teams[i].getPlayers()[j].salaryOfEmployee()) {
-                    player_with_smallest_salary = teams[i].getPlayers()[j];
-                }
-            }
-            System.out.println(player_with_smallest_salary);
-
-        }
+//        for (int i = 0; i < teams.length; i++) {
+//            Player player_with_smallest_salary = teams[i].getPlayers();
+//            for (int j = 1; j < teams[i].getPlayers().size(); j++) {
+//                System.out.println("The players with the smallest salary in team " + (i + 1) + ": ");
+//                if (player_with_smallest_salary.salaryOfEmployee() > teams[i].getPlayers()[j].salaryOfEmployee()) {
+//                    player_with_smallest_salary = teams[i].getPlayers()[j];
+//                }
+//            }
+//            System.out.println(player_with_smallest_salary);
+//
+//        }
 
     }
 

@@ -1,32 +1,29 @@
 package classWork2;
 
+import java.util.List;
+
 public class Team {
     private String teamName;
     private String stadiumName;
-    private Player[] players;
+    private List<Player> players;
     private int amountOfPlayers;
     private Coach coach;
     private Manager manager;
 
-    public Team(String teamName, String stadiumName, Player[] players, Coach coach, Manager manager) {
+    public Team(String teamName, String stadiumName, List<Player> players, Coach coach, Manager manager) {
         this.teamName = teamName;
         this.stadiumName = stadiumName;
-        this.players = new Player[amountOfPlayers];
+        this.players = players;
         this.coach = new Coach(coach);
         this.manager = new Manager(manager);
     }
 
-    public Team(Player[] players) {
-        this.players = new Player[amountOfPlayers];
+    public Team(List<Player> players) {
+        this.players = players;
     }
 
     public void addPlayer(Player player1) {
-        Player[] temp = new Player[players.length + 1];
-        for (int i = 0; i < players.length; i++) {
-            temp[i] = players[i];
-            temp[players.length] = player1;
-            players = temp;
-        }
+        players.add(player1);
     }
 
     public void addManager(Manager manager1) {
@@ -46,9 +43,9 @@ public class Team {
     }
 
     public Player checkIdNumber(String idNumber) {
-        for (int i = 0; i < players.length; i++) {
-            if (idNumber.equals(players[i].getIdNumber())) {
-                return players[i];
+        for (int i = 0; i < players.size(); i++) {
+            if (idNumber.equals(players.get(i).getIdNumber())) {
+                return players.get(i);
             }
         }
         System.out.println("The ID entered does not belong to any player ");
@@ -56,9 +53,9 @@ public class Team {
     }
 
     public Player checkName(String firstName, String lastName) {
-        for (int i = 0; i < players.length; i++) {
-            if (firstName.equals(players[i].getFirstName()) && lastName.equals(players[i].getLastName())) {
-                return players[i];
+        for (int i = 0; i < players.size(); i++) {
+            if (firstName.equals(players.get(i).getFirstName()) && lastName.equals(players.get(i).getLastName())) {
+                return players.get(i);
             }
         }
         System.out.println("There is no player with this name");
@@ -73,7 +70,7 @@ public class Team {
         return stadiumName;
     }
 
-    public Player[] getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
@@ -109,14 +106,14 @@ public class Team {
         addManager(manager);
     }
 
-    public void setPlayers(Player[] players) {
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 
     public String toString() {
         String output = "";
-        for (int i = 0; i < players.length; i++) {
-            output += "\nPlayer " + i + players[i];
+        for (int i = 0; i < players.size(); i++) {
+            output += "\nPlayer " + i + players.get(i);
         }
         output += "\nTeam name: " + getTeamName() + ", stadium name: " + getStadiumName() + "\nCoach: " + getCoach() + "\nManager: " + getManager();
         return output;
